@@ -1,11 +1,15 @@
-###Run preiction model: 
-```python run.py```
+### Run preiction model: 
+```
+python run.py
+```
 to read test_input.txt and write to test_output.txt.
 
 Warning: it will delete test_input.txt
 
-###Fake News Chanllenge: 
-```http://www.fakenewschallenge.org/```
+### Fake News Chanllenge: 
+```
+http://www.fakenewschallenge.org/
+```
 
 - The model is trained based on the fnc-1-baseline
 `https://github.com/FakeNewsChallenge/fnc-1-baseline`
