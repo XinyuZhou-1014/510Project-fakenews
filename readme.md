@@ -1,18 +1,18 @@
 Only support Python 3. Requirements are in requiurements.txt
 
-###Show model accuracy
+### Show model accuracy
 ```
 python train_engine.py
 ```
 It will use the train and test data from fakenews-baseline to train the model and show score.
 
-###Train model
+### Train model
 ```
 python train.py
 ```
 It will use the train and test data from fakenews-baseline to train the full model.
 
-###Run prediction model: 
+### Run prediction model: 
 ```
 python run.py
 ```
