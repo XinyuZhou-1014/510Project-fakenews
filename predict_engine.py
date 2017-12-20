@@ -85,7 +85,7 @@ class FakeNewsModel():
             with open(output_file_path, "w") as f:
                 f.write("\n".join(res))
 
-            with open("model_finish.tmp", "w") as f:
+            with open("./temp/model_finish.tmp", "w") as f:
                 pass
             os.remove(input_file_path)
             tt = time.time()

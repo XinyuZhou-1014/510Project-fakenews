@@ -10,7 +10,7 @@ def default():
 from flask import request
 from werkzeug.utils import secure_filename
 
-file_save_path = "../510project-fakenews/test_input.txt"
+file_save_path = "../temp/test_input.txt"
 
 @app.route('/upload', methods=['GET', 'POST'])
 def upload_file():
@@ -23,8 +23,8 @@ def upload_file():
         return render_template('main.html', status="File uploaded", output=output)
     return render_template('main.html', status="Not Post?")
 
-output_file_path = "../510project-fakenews/test_output.txt"
-flag_file_path = "../510project-fakenews/model_finish.tmp"
+output_file_path = "../temp/test_output.txt"
+flag_file_path = "../temp/model_finish.tmp"
 
 import os
 import time

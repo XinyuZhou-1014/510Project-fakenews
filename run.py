@@ -1,8 +1,8 @@
 from predict_engine import FakeNewsModel
 
-DEFAULT_INPUT_FILE = "test_input.txt"
-DEFAULT_OUTPUT_FILE = "test_output.txt"
-DEFAULT_MODEL_FILE = 'fakenews_models/lgbm_res.txt'
+DEFAULT_INPUT_FILE = "./temp/test_input.txt"
+DEFAULT_OUTPUT_FILE = "./temp/test_output.txt"
+DEFAULT_MODEL_FILE = './fakenews_models/lgbm_res.txt'
 DEFAULT_TOP_WORDS = 10000
 
 
