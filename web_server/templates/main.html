@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+<head>
+<title>510 Project - Fake News Detection</title>
+</head>
+<body>
+    <center>
+
+    <h1>510 Project - Fake News Detection</h1>
+    <h2>Xinyu Zhou (xinyuz4@illinois.edu)</h2>
+
+    <br/>
+
+    {% if status %}
+      <h2>{{ status }}!</h2>
+    {% endif %}
+
+    <br/>
+
+    <div>
+        <h4> Output: <h4>
+        {% if output %}
+            <p>{{ output }}!</p>
+        {% else %}
+            <p>N/A</p>
+        {% endif %}
+    </div>
+
+
+    <br/>
+
+    <div>
+        <h4>Upload File</h4>
+        <form action="/upload" method="post" enctype="multipart/form-data">
+            <input type="file" name="fileToUpload" id="fileToUpload">
+            <input type="submit" value="Upload File" name="submit">
+        </form>
+    </div>
+
+    </center>
+
+</body>
+</html>

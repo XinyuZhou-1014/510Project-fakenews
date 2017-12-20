@@ -43,9 +43,9 @@ class FakeNewsModel():
         res = []
         for pred in y_pred:
             string = "%s: %7.4f, %s: %7.4f, %s: %7.4f, %s: %7.4f" % (
-                LABELS[0], pred[0], 
-                LABELS[1], pred[1], 
-                LABELS[2], pred[2], 
+                LABELS[0], pred[0],
+                LABELS[1], pred[1],
+                LABELS[2], pred[2],
                 LABELS[3], pred[3]
             )
             res.append(string)
@@ -54,14 +54,14 @@ class FakeNewsModel():
     def simple_text_parser(self, input_file_path):
         '''
         simple text parser
-        assume there are even lines in total, 
+        assume there are even lines in total,
         each odd line is headline and the following line is body
         '''
         with open(input_file_path, "r") as f:
             text = f.readlines()
         try:
             assert len(text) % 2 == 0
-        except AssertionError: 
+        except AssertionError:
             print("Warning: simple text parser only support format like this:")
             print("Even lines in total,")
             print("each odd line is headline and the following line is body.")
@@ -85,6 +85,8 @@ class FakeNewsModel():
             with open(output_file_path, "w") as f:
                 f.write("\n".join(res))
 
+            with open("model_finish.tmp", "w") as f:
+                pass
             os.remove(input_file_path)
             tt = time.time()
             print("Finish one output (%.4fs)." % (tt - t))
