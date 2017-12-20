@@ -12,6 +12,12 @@ import os
 import lightgbm as lgb
 
 
+file_save_path = "./temp/test_input.txt"
+upload_flag_file_path = "./temp/model_start.tmp"
+output_file_path = "./temp/test_output.txt"
+finish_flag_file_path = "./temp/model_finish.tmp"
+
+
 class FakeNewsModel():
     def __init__(self, model_file, top=10000, wait_time=0.2):
         self.wait_time = wait_time
@@ -60,33 +66,37 @@ class FakeNewsModel():
         with open(input_file_path, "r") as f:
             text = f.readlines()
         try:
-            assert len(text) % 2 == 0
+            assert len(text) % 2 == 0 and len(text) > 1
         except AssertionError:
-            print("Warning: simple text parser only support format like this:")
-            print("Even lines in total,")
-            print("each odd line is headline and the following line is body.")
-            print("The input has odd lines, so ignore the last line.")
-            text = text[:-1]
-
+            return None, None
         h = [text[2*i] for i in range(len(text) // 2)]
         b = [text[2*i+1] for i in range(len(text) // 2)]
         return h, b
 
-    def input_output(self, input_file_path, output_file_path, model_name=None):
+    def input_output(self, input_file_path=file_save_path, output_file_path=output_file_path, model_name=None):
         if model_name is not None:
             self.read_model(model_name)
         while True:
-            while not (os.path.exists(input_file_path)):
-                time.sleep(self.wait_time)
+            try:
+                while not (os.path.exists(input_file_path) and os.path.exists(upload_flag_file_path)):
+                    time.sleep(self.wait_time)
 
-            t = time.time()
-            headlines, bodies = self.simple_text_parser(input_file_path)
-            res = self.get_result(headlines, bodies)
+                t = time.time()
+                headlines, bodies = self.simple_text_parser(input_file_path)
+                if headlines is None and bodies is None:
+                    res = ["Illegal input file.",
+                           "There should be even lines with format: headline \\n body  \\n headline \\n body."
+                          ]
+                else:
+                    res = self.get_result(headlines, bodies)
+            except BaseException:
+                res = ["Unexpected Error.", "Please upload file again."]
             with open(output_file_path, "w") as f:
                 f.write("\n".join(res))
 
-            with open("./temp/model_finish.tmp", "w") as f:
+            with open(finish_flag_file_path, "w") as f:
                 pass
+
             os.remove(input_file_path)
             tt = time.time()
             print("Finish one output (%.4fs)." % (tt - t))
